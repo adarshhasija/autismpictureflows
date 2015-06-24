@@ -1,0 +1,115 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.adarshhasija.flows.EditImageActivity">
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="25dp"
+        android:id="@+id/progressBarSave"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/play_audio"
+        android:id="@+id/buttonPlayStop"
+        android:textSize="20dp"
+        android:textColor="#ff100fff"
+        android:background="@android:color/transparent"
+        android:layout_below="@id/progressBar"
+        android:layout_alignParentStart="true"
+        android:visibility="invisible" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/defaults"
+        android:id="@+id/buttonDefaults"
+        android:textSize="20dp"
+        android:textColor="#ff2218ff"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageViewMain"
+        android:layout_below="@id/progressBarSave"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ic_launcher"
+        android:contentDescription="@string/main_image" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/camera"
+        android:id="@+id/buttonCamera"
+        android:layout_below="@+id/imageViewMain"
+        android:layout_alignLeft="@+id/imageViewMain"
+        android:layout_alignStart="@+id/imageViewMain"
+        android:background="#ff1827ff"
+        android:textColor="#ffffffff"
+        android:layout_marginTop="5dp"
+        android:visibility="gone" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gallery"
+        android:id="@+id/buttonGallery"
+        android:layout_alignBottom="@+id/buttonCamera"
+        android:layout_alignRight="@+id/imageViewMain"
+        android:layout_alignEnd="@+id/imageViewMain"
+        android:background="#ff233eff"
+        android:textColor="#ffffffff"
+        android:visibility="gone" />
+
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextTitle"
+        android:layout_below="@+id/buttonCamera"
+        android:hint="@string/title"
+        android:layout_alignLeft="@+id/buttonCamera"
+        android:layout_alignStart="@+id/buttonCamera"
+        android:layout_alignRight="@+id/buttonGallery"
+        android:layout_alignEnd="@+id/buttonGallery"
+        android:visibility="gone" />
+
+
+    <ImageView
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/imageViewPlay"
+        android:layout_below="@+id/editTextTitle"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/play_button_large"
+        android:layout_marginTop="10dp"
+        android:visibility="gone" />
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/change_audio"
+        android:id="@+id/buttonChangeAudio"
+        android:layout_below="@+id/imageViewPlay"
+        android:layout_marginTop="10dp"
+        android:background="#ff1e2eff"
+        android:textColor="#ffffffff"
+        android:layout_alignLeft="@+id/editTextTitle"
+        android:layout_alignStart="@+id/editTextTitle"
+        android:layout_alignRight="@+id/editTextTitle"
+        android:layout_alignEnd="@+id/editTextTitle"
+        android:visibility="gone" />
+
+</RelativeLayout>
