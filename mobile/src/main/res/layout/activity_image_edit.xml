@@ -3,12 +3,23 @@
     android:layout_height="match_parent"
     tools:context="com.adarshhasija.flows.EditImageActivity">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/saving"
+        android:id="@+id/textViewSaving"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:visibility="gone" />
+
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="fill_parent"
         android:layout_height="25dp"
         android:id="@+id/progressBarSave"
-        android:layout_alignParentTop="true"
+        android:layout_below="@id/textViewSaving"
         android:layout_centerHorizontal="true"
         android:visibility="gone" />
 

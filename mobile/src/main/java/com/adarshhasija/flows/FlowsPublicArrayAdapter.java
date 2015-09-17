@@ -29,6 +29,7 @@ public class FlowsPublicArrayAdapter extends ArrayAdapter<ParseObject> {
     static class ViewHolder {
         ImageView iconView;
         TextView text;
+        TextView creator;
     }
 
     public FlowsPublicArrayAdapter(Context context, int resource, List<ParseObject> objects) {
@@ -51,6 +52,7 @@ public class FlowsPublicArrayAdapter extends ArrayAdapter<ParseObject> {
             viewHolder = new ViewHolder();
             viewHolder.text = (TextView) convertView.findViewById(R.id.text);
             viewHolder.iconView = (ImageView) convertView.findViewById(R.id.icon);
+            viewHolder.creator = (TextView) convertView.findViewById(R.id.creator);
             convertView.setTag(viewHolder);
         }
         else {
@@ -61,6 +63,7 @@ public class FlowsPublicArrayAdapter extends ArrayAdapter<ParseObject> {
 
         //viewHolder.iconView.setImageResource(R.drawable.microsoftexcel);
         viewHolder.text.setText(object.getString("text"));
+        viewHolder.creator.setText(object.getString("creatorString"));
 
         new AsyncTask<ViewHolder, Void, Bitmap>() {
             private ViewHolder v;

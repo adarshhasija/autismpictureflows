@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -27,6 +28,7 @@ public class FlowsUserListActivity extends ActionBarActivity {
 
     private ListView listView;
     private TextView textViewEmpty;
+    private RelativeLayout greetingsLayout;
 
     private FindCallback findCallbackCloud = new FindCallback() {
         @Override
@@ -63,6 +65,14 @@ public class FlowsUserListActivity extends ActionBarActivity {
         setContentView(R.layout.activity_flows_user_list);
 
         textViewEmpty = (TextView) findViewById(R.id.textViewEmpty);
+        greetingsLayout = (RelativeLayout) findViewById(R.id.greetingsLayout);
+        greetingsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FeelingsListActivity.class);
+                startActivity(intent);
+            }
+        });
         listView = (ListView) findViewById(R.id.list);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -73,7 +83,7 @@ public class FlowsUserListActivity extends ActionBarActivity {
                 bundle.putString("id", object.getObjectId());
                 //bundle.putParcelable("flow", flow);
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivityForResult(intent, position);
             }
         });
 
@@ -124,6 +134,22 @@ public class FlowsUserListActivity extends ActionBarActivity {
                 e.printStackTrace();
             }
 
+        }
+        else if (requestCode > -1 && resultCode == Activity.RESULT_OK && null != data) {
+            Bundle extras = data.getExtras();
+            String type = extras.getString("type");
+            if (type.equals("delete")) {
+                ParseObject flow = (ParseObject) listView.getAdapter().getItem(requestCode);
+                try {
+                    flow.unpin("Flow");
+                    flow.deleteEventually();
+                    FlowsUserArrayAdapter adapter = (FlowsUserArrayAdapter) listView.getAdapter();
+                    adapter.remove(adapter.getItem(requestCode));
+                    adapter.notifyDataSetChanged();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

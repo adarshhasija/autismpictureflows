@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -38,6 +39,7 @@ public class EditImageActivity extends ActionBarActivity {
     private ParseFile parseFile;
     private boolean isSaving=false;
 
+    private TextView textViewSaving;
     private ProgressBar progressBarSave;
     MenuItem saveButton;
 
@@ -91,6 +93,7 @@ public class EditImageActivity extends ActionBarActivity {
             e.printStackTrace();
         }
 
+        textViewSaving = (TextView) findViewById(R.id.textViewSaving);
         progressBarSave = (ProgressBar) findViewById(R.id.progressBarSave);
         final Button buttonPlayStop = (Button) findViewById(R.id.buttonPlayStop);
         Button buttonDefaults = (Button) findViewById(R.id.buttonDefaults);
@@ -208,9 +211,9 @@ public class EditImageActivity extends ActionBarActivity {
     private void isSaving() {
         isSaving = true;
         saveButton.setIcon(R.drawable.ic_action_cancel);
+        textViewSaving.setVisibility(View.VISIBLE);
         progressBarSave.setVisibility(View.VISIBLE);
         progressBarSave.setProgress(0);
-        setTitle("Saving...");
         ImageView imageViewMain = (ImageView) findViewById(R.id.imageViewMain);
         Bitmap bitmap = ((BitmapDrawable)imageViewMain.getDrawable()).getBitmap();
         saveImage(bitmap);
@@ -219,8 +222,8 @@ public class EditImageActivity extends ActionBarActivity {
     private void isNotSaving() {
         isSaving = false;
         saveButton.setIcon(R.drawable.ic_action_save);
+        textViewSaving.setVisibility(View.GONE);
         progressBarSave.setVisibility(View.GONE);
-        setTitle(R.string.title_activity_item_edit);
         if (parseFile != null) parseFile.cancel();
     }
 

@@ -13,18 +13,42 @@
         android:contentDescription="TODO"
         android:src="@mipmap/ic_launcher" />
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="The Sender"
-        android:textSize="20sp"
-        android:layout_centerVertical="true"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_toRightOf="@+id/icon"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_toEndOf="@+id/icon"
-        android:textStyle="bold"
-        android:textColor="#ff0a0a0a" />
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Activity"
+            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/icon"
+            android:textStyle="bold"
+            android:textColor="#ff0a0a0a" />
+
+        <TextView
+            android:id="@+id/creator"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Creator"
+            android:textSize="14sp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/icon"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/icon"
+            android:layout_below="@id/text"
+            android:textColor="#ff0a0a0a" />
+    </LinearLayout>
 
 </RelativeLayout>

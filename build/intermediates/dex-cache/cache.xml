@@ -2,172 +2,11 @@
 <items version="2" >
 
     <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="9224bc4c54ba95147c7eabd874573763c07cb6be">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-089b5675f7242aeefc8b27c251b678ec057e21b7.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="3c0b099f9de16b265ecd6122fcb603e7d0d29f90">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-c0eb97c3727f1db1312d2025a0766efe937b9b25.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="73ccb92b70112f2e463e415ef8d7275de7da6516">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-c509bf7d78524a0eebb18586e4f1b1ca267cf4a3.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="e3d791b42eaa90416cd0b2d2e608092794a3baa4">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-96307f1c843fd761368761c4f4f83ffb1405d45b.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ef5f051e7308febe289dc93c67c5f32785b4260a">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-b0991063ce3ad1db1ebf37d082295a780b83b760.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="29fd6d3794b71491c2789708cd8d03c71feb8954">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-9f955c311a8045e93e121150f06cb57b16e70558.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="c976518693e89ad44fbfccfc654941eaec198d08">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-53d80f740a492a547694fb6a1e39ce52a422198a.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-80b28cbbbed293a86ac30a5702ddefa2b9a6eac3.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a08d65794b844d8e7540bf9a33859bf3b2482d7f">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-b85bb8f67b39fcd34ee25e4cc9f220734f5b33df.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="055783146ba9654a725442563be78cad303aad1f">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-c8e4084250ee505a8c4d73f781085b964bed4238.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="1c5a76debf0c2857ccad422c4a80ed785982f8df">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-764c218518c66f44bea7a5e2e92cfe456425aa5d.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4c93d99d454c975536bbe3b42283eee847f03ea3">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-bcd3fbd1a27fea3256c3da0c28411726c8ee4ff7.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-cc0cfbe6f0ce06462c40876dceb736cac1fb4003.jar" />
-    </item>
-    <item
         jar="/Users/adarshhasija/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
         <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-bcd58fcbd0451b4a82df01a6eb52841958f2a58f.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="0e8228b4bc69c6a2c8d7c18498a77e53417d2574">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-a3478870e53f1f60257dec5260366c1c706bcfac.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-4232ee8959bf6d085894975c7ba961089ea895e2.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="17f8750d5c0749e44dd7c54aa390d9c937803825">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-a30870c091d345942aa20952d38f956d66ef753b.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="7ff613bf78ab057293892fdbd4169eda899c89b9">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-868b0bdf09b9a719074d15028734c4d1a54faa4c.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/libs/ParseCrashReporting-1.8.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="55e71442ecbce939ce2a1ad75d1a4408a61d6804">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/ParseCrashReporting-1.8.0-d2ffd81df10709251b35fa8797865e549abb9cd0.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a96b762bde4139de855735f175ec4d17dca55a6d">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-c0829fd96e529b6d582b072b6c781396c6a67769.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4cd0b093824b3228fffc21ea369b98d0b1db6566">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-1f84720258a522ff506e7e0fee50677ad78b5353.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-fa81f332cdce26c9338453c6c97fa5d3843f85cb.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="41b3870cbe5fa546d8095b5b89d42cb69f3dd175">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-027e9c68af94d061bb55be0cba080508d79e16d8.jar" />
-    </item>
-    <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="fb04b12526b0073c7fb1ebb70c5842d82ee95596">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-18d591835e74b885f8ad1e49c14bd9072865f271.jar" />
     </item>
     <item
         jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/libs/Parse-1.8.0.jar"
@@ -177,11 +16,172 @@
         <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/Parse-1.8.0-178d6ea0becac3d391e3efb0a24051fa2878239c.jar" />
     </item>
     <item
-        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.0.0/classes.jar"
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="41b3870cbe5fa546d8095b5b89d42cb69f3dd175">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-5eb4ea0a3749064aa2dd9c0412a80150d037e8c3.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="29fd6d3794b71491c2789708cd8d03c71feb8954">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-afa35d276ac4210d43ee57c2ad5245baea7df0b1.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-ffe72a324a829f5e7433d7cb29044b393b904e80.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a08d65794b844d8e7540bf9a33859bf3b2482d7f">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-7a108164a5d231e468a8ea00ac19a9863bfd8a0c.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="73ccb92b70112f2e463e415ef8d7275de7da6516">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-fb1c6a992ee99122f8db3a0315504d31e9d39440.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0e8228b4bc69c6a2c8d7c18498a77e53417d2574">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-95675e629da1bd5a59b7de87f08a266b4218d719.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="fb04b12526b0073c7fb1ebb70c5842d82ee95596">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-2c57d8ad72a9ca5a93c4e59bc972baa2a31ad051.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3c0b099f9de16b265ecd6122fcb603e7d0d29f90">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-d84bc2cf3f4e8873de05eed99935668b4d50acf9.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-5e00291850cacd7369183c91552ab5003576879e.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/libs/ParseCrashReporting-1.8.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="55e71442ecbce939ce2a1ad75d1a4408a61d6804">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/ParseCrashReporting-1.8.0-d2ffd81df10709251b35fa8797865e549abb9cd0.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ef5f051e7308febe289dc93c67c5f32785b4260a">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-a68e27ca3fb789d57a8379172b7cc635750c9284.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.0.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="3033cc3a2c68dff3e5b646d6d084bdbdf7d00b25">
-        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-914d0bb4385f914a878a0ac6f4136ffcb6168f4e.jar" />
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-302e3769d7af6a4b6274712965141d92cf2a062a.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7ff613bf78ab057293892fdbd4169eda899c89b9">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-e44929cf413e1e5923344518076793dc66217d17.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4cd0b093824b3228fffc21ea369b98d0b1db6566">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-9157886f2ea93369490283a1102c479d2ed867bd.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4c93d99d454c975536bbe3b42283eee847f03ea3">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-79a99bf0fb72e063a7f13e2200e69d0d3c0539d8.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c976518693e89ad44fbfccfc654941eaec198d08">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-9abaf50181632d94a4e4541a6abb13a725a8ba8b.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e3d791b42eaa90416cd0b2d2e608092794a3baa4">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-5fc1d5ed36ab3e2cad24c12ece4c916451c9c580.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a96b762bde4139de855735f175ec4d17dca55a6d">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-dfa21eae6b4e90082b8dff52d72430e6d616da48.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-4232ee8959bf6d085894975c7ba961089ea895e2.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="17f8750d5c0749e44dd7c54aa390d9c937803825">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-ad9154538094c9da3f207ee57adf603331938756.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1c5a76debf0c2857ccad422c4a80ed785982f8df">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-c4afc86d92bdb15192eeeca343fb7846c3f82ae4.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-47ecba4b177b33fd3ba062b9e1f360d8aff7e5b8.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="055783146ba9654a725442563be78cad303aad1f">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-bb2cb417c47df2c7a63b15554bb9513119b4386e.jar" />
+    </item>
+    <item
+        jar="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9224bc4c54ba95147c7eabd874573763c07cb6be">
+        <dex dex="/Users/adarshhasija/Desktop/workspaces/Android_Studio/ComputerActivities/mobile/build/intermediates/pre-dexed/debug/classes-fdab441fdfc946bd7d9091147a9bacd333123ab0.jar" />
     </item>
 
 </items>

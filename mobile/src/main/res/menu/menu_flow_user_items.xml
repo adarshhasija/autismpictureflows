@@ -4,5 +4,6 @@
     tools:context="com.adarshhasija.flows.MainActivity">
 
 
-
+    <item android:id="@+id/action_discard" android:icon="@drawable/ic_action_discard" android:title="@string/delete"
+        android:orderInCategory="100" app:showAsAction="always" />
 </menu>

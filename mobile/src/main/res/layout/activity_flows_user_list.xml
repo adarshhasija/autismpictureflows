@@ -3,6 +3,50 @@
     android:layout_height="match_parent" 
     tools:context="com.adarshhasija.flows.FlowsUserListActivity">
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:id="@+id/greetingsLayout"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <!--<ImageView
+            android:id="@+id/iconGreetings"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:contentDescription="TODO"
+            android:src="@drawable/emoji_sick" />   -->
+
+        <TextView
+            android:id="@+id/textGreetings"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/feelings"
+            android:textSize="16sp"
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:textColor="#ff0a0a0a" />
+
+        <!--  android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iconGreetings"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/icon"  -->
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:id="@+id/blackLine"
+        android:layout_height="2dp"
+        android:layout_below="@id/greetingsLayout"
+        android:layout_centerHorizontal="true"
+        android:background="#f7111111"></RelativeLayout>
+
     <TextView android:text="@string/list_empty" android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -13,6 +57,8 @@
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_below="@id/blackLine"
         android:id="@+id/list" />
+
 
 </RelativeLayout>

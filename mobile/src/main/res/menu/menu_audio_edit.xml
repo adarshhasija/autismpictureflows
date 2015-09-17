@@ -5,6 +5,6 @@
     <!--<item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" /> -->
 
-    <item android:id="@+id/action_save" android:icon="@drawable/ic_action_save" android:title="@string/save"
+    <item android:id="@+id/action_cancel" android:icon="@drawable/ic_action_cancel" android:title="@string/cancel"
         android:orderInCategory="100" app:showAsAction="always" />
 </menu>

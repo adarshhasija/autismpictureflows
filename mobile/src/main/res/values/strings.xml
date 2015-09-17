@@ -9,6 +9,9 @@
     <string name="msword">Microsoft Word</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="save">save</string>
+    <string name="delete">delete</string>
+    <string name="delete_confirm">Are you sure you want to delete?</string>
+    <string name="cancel">cancel</string>
     <string name="next">next</string>
     <string name="back">back</string>
     <string name="play">play</string>
@@ -28,6 +31,20 @@
     <string name="title_activity_flows_user_list">FlowsUserListActivity</string>
     <string name="list_empty">No items to display</string>
     <string name="title_activity_flow_public_items">FlowPublicItemsActivity</string>
-    <string name="reset_default">Reset default</string>
+    <string name="reset_default_audio">Want computer voice?\nReset default</string>
+    <string name="no_user_found">No user found</string>
+    <string name="no_user_found_message">You need to login or signup to download this</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="no_internet_connection_message">You must be connected to the internet to download this</string>
+    <string name="download_activity_flow">Are you sure?</string>
+    <string name="download_activity_flow_message">Are you sure you would like to download this activity flow?</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="saving">Saving</string>
+    <string name="download_complete_return_to_profile">Download Complete\nTap here to return to your profile</string>
+    <string name="feelings">Feelings</string>
+    <string name="title_activity_feelings_list">Feelings</string>
 
 </resources>

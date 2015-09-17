@@ -1,13 +1,14 @@
 package com.adarshhasija.flows;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,13 +18,9 @@ import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -35,10 +32,16 @@ public class FlowUserItemsActivity extends ActionBarActivity {
 
     private ListView listView;
 
+    private List<ParseObject> mList=null;
     private ParseObject flowParseObject=null;
     private TextToSpeech textToSpeech=null;
     private void playAudio(String text) {
-        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, "0");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, "0");
+        }
+        else {
+            textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+        }
     }
 
 
@@ -49,6 +52,7 @@ public class FlowUserItemsActivity extends ActionBarActivity {
             if (e == null) {
                 try {
                     ParseObject.pinAll("Item", list);
+                    mList = list;
                 } catch (ParseException e1) {
                     e1.printStackTrace();
                 }
@@ -87,63 +91,13 @@ public class FlowUserItemsActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ParseObject object = (ParseObject) listView.getAdapter().getItem(position);
-                if (object.getParseFile("audio") == null) {
-                    playAudio(object.getString("text"));
-                }
-                else {
-                    ParseFile parseFileAudio = object.getParseFile("audio");
-                    if(parseFileAudio != null) {
-                        File audioFile = Parse.parseFileToJavaFile(parseFileAudio, "audioFile", "3gp");
-                        final MediaPlayer mPlayer = new MediaPlayer();
-                        try {
-                            FileInputStream fis = new FileInputStream(audioFile);
-                            mPlayer.setDataSource(fis.getFD());
-                            mPlayer.prepare();
-                            mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                                @Override
-                                public void onCompletion(MediaPlayer mp) {
-                                    mPlayer.setOnCompletionListener(null);
-                                    mPlayer.release();
-                                }
-                            });
-                            mPlayer.start();
-                        } catch (IOException e) {
-                            Log.e(LOG_TAG, "prepare() failed");
-                        }
-                    }
-                }
+                Intent intent = new Intent(getApplicationContext(), FullscreenActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", object.getObjectId());
+                intent.putExtras(bundle);
+                startActivityForResult(intent, position);
             }
         });
-      /*  listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                if (currentUser != null &&
-                        flowParseObject.getParseUser("owner") == currentUser) {
-                    ParseObject object = (ParseObject) listView.getAdapter().getItem(position);
-                    Intent intent = new Intent(getApplicationContext(), EditImageActivity.class);
-                    Bundle bundle = new Bundle();
-                    //bundle.putParcelable("item", item);
-                    bundle.putString("id", object.getObjectId());
-                    intent.putExtras(bundle);
-                    startActivityForResult(intent, position);
-                }
-                else {
-                    new AlertDialog.Builder(FlowUserItemsActivity.this)
-                            .setTitle("No editing")
-                            .setMessage("If you would like to edit, you must download this activity flow to your account")
-                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // continue with delete
-                                }
-                            })
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                }
-
-                return true;
-            }
-        }); */
 
 
         Bundle bundle = getIntent().getExtras();
@@ -157,6 +111,7 @@ public class FlowUserItemsActivity extends ActionBarActivity {
         query.fromLocalDatastore();
         try {
             list = query.find();
+            mList = list;
             populateList(list);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -268,6 +223,38 @@ public class FlowUserItemsActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        if (id == R.id.action_discard) {
+            new AlertDialog.Builder(FlowUserItemsActivity.this)
+                    .setTitle(R.string.delete)
+                    .setMessage(R.string.delete_confirm)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            try {
+                                for (ParseObject item : mList) {
+                                    item.deleteEventually();
+                                }
+                                ParseObject.unpinAll("Item", mList);
+                                Intent returnIntent = new Intent();
+                                Bundle bundle = new Bundle();
+                                bundle.putString("type", "delete");
+                                returnIntent.putExtras(bundle);
+                                setResult(Activity.RESULT_OK, returnIntent);
+                                finish();
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    })
+                    .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
 
 
         return super.onOptionsItemSelected(item);

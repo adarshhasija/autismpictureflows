@@ -46,7 +46,8 @@ public class EditAudioActivity extends ActionBarActivity implements View.OnClick
     private ParseObject flowParseObject;
     private ParseFile parseFile;
 
-    private MenuItem saveButton;
+    private MenuItem cancelButton;
+    private TextView textViewSaving;
     private ProgressBar progressBarSave;
     private Chronometer chronometerRecord;
     private ImageView imageViewMic;
@@ -56,6 +57,7 @@ public class EditAudioActivity extends ActionBarActivity implements View.OnClick
     private ProgressBar progressBar;
     private Chronometer chronometerElapsedTime;
     private Chronometer chronometerTotalTime;
+    private Button buttonSaveAudio;
     private Button buttonResetDefault;
 
     private boolean isSaving=false;
@@ -97,8 +99,8 @@ public class EditAudioActivity extends ActionBarActivity implements View.OnClick
         progressBar.setVisibility(View.INVISIBLE);
         chronometerElapsedTime.setVisibility(View.INVISIBLE);
         chronometerTotalTime.setVisibility(View.INVISIBLE);
+        buttonSaveAudio.setVisibility(View.INVISIBLE);
         buttonResetDefault.setVisibility(View.INVISIBLE);
-        saveButton.setVisible(false);
 
         chronometerRecord.setBase(SystemClock.elapsedRealtime());
         chronometerRecord.setTextColor(Color.BLACK);
@@ -149,8 +151,8 @@ public class EditAudioActivity extends ActionBarActivity implements View.OnClick
         progressBar.setVisibility(View.VISIBLE);
         chronometerElapsedTime.setVisibility(View.VISIBLE);
         chronometerTotalTime.setVisibility(View.VISIBLE);
+        buttonSaveAudio.setVisibility(View.VISIBLE);
         buttonResetDefault.setVisibility(View.VISIBLE);
-        saveButton.setVisible(true);
     }
 
     private void startPlaying() {
@@ -163,8 +165,8 @@ public class EditAudioActivity extends ActionBarActivity implements View.OnClick
         progressBar.setVisibility(View.VISIBLE);
         chronometerElapsedTime.setVisibility(View.VISIBLE);
         chronometerTotalTime.setVisibility(View.VISIBLE);
+        buttonSaveAudio.setVisibility(View.INVISIBLE);
         buttonResetDefault.setVisibility(View.INVISIBLE);
-        saveButton.setVisible(false);
 
         chronometerElapsedTime.setBase(SystemClock.elapsedRealtime());
         progressBar.setProgress(0);
@@ -213,8 +215,8 @@ public class EditAudioActivity extends ActionBarActivity implements View.OnClick
         progressBar.setVisibility(View.VISIBLE);
         chronometerElapsedTime.setVisibility(View.VISIBLE);
         chronometerTotalTime.setVisibility(View.VISIBLE);
+        buttonSaveAudio.setVisibility(View.VISIBLE);
         buttonResetDefault.setVisibility(View.VISIBLE);
-        saveButton.setVisible(true);
     }
 
     private void saveAndExit() {
@@ -231,6 +233,7 @@ public class EditAudioActivity extends ActionBarActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_audio_edit);
 
+        textViewSaving = (TextView) findViewById(R.id.textViewSaving);
         progressBarSave = (ProgressBar) findViewById(R.id.progressBarSave);
         chronometerRecord = (Chronometer) findViewById(R.id.chronometerRecord);
         imageViewMic = (ImageView) findViewById(R.id.imageViewMic);
@@ -240,12 +243,15 @@ public class EditAudioActivity extends ActionBarActivity implements View.OnClick
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         chronometerElapsedTime = (Chronometer) findViewById(R.id.chronometerElapsedTime);
         chronometerTotalTime = (Chronometer) findViewById(R.id.chronometerTotalTime);
+        buttonSaveAudio = (Button) findViewById(R.id.buttonSaveAudio);
         buttonResetDefault = (Button) findViewById(R.id.buttonResetDefault);
         imageViewMic.setOnClickListener(this);
         imageViewStop.setOnClickListener(this);
         imageViewPlay.setOnClickListener(this);
+        buttonSaveAudio.setOnClickListener(this);
         buttonResetDefault.setOnClickListener(this);
 
+        textViewSaving.setVisibility(View.GONE);
         progressBarSave.setVisibility(View.GONE);
         textViewInstruction.setVisibility(View.VISIBLE);
         imageViewStop.setVisibility(View.INVISIBLE);
@@ -253,6 +259,7 @@ public class EditAudioActivity extends ActionBarActivity implements View.OnClick
         progressBar.setVisibility(View.INVISIBLE);
         chronometerElapsedTime.setVisibility(View.INVISIBLE);
         chronometerTotalTime.setVisibility(View.INVISIBLE);
+        buttonSaveAudio.setVisibility(View.INVISIBLE);
         buttonResetDefault.setVisibility(View.INVISIBLE);
 
         Bundle extras = getIntent().getExtras();
@@ -267,6 +274,9 @@ public class EditAudioActivity extends ActionBarActivity implements View.OnClick
 
         if (flowParseObject.getParseFile("audio") != null) {
             buttonResetDefault.setVisibility(View.VISIBLE);
+        }
+        else {
+            buttonResetDefault.setVisibility(View.GONE);
         }
             try {
                 tempFile = File.createTempFile(flowParseObject.getObjectId(),"3gp");
@@ -292,8 +302,8 @@ public class EditAudioActivity extends ActionBarActivity implements View.OnClick
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_audio_edit, menu);
 
-        saveButton = (MenuItem) menu.findItem(R.id.action_save);
-        //saveButton.setVisible(false);
+        cancelButton = (MenuItem) menu.findItem(R.id.action_cancel);
+        cancelButton.setVisible(false);
 
         return true;
     }
@@ -350,10 +360,12 @@ public class EditAudioActivity extends ActionBarActivity implements View.OnClick
 
     private void isSaving() {
         isSaving = true;
-        saveButton.setIcon(R.drawable.ic_action_cancel);
+        cancelButton.setVisible(true);
+        buttonSaveAudio.setVisibility(View.INVISIBLE);
+        textViewSaving.setVisibility(View.VISIBLE);
         progressBarSave.setVisibility(View.VISIBLE);
+        imageViewMic.setVisibility(View.INVISIBLE);
         progressBarSave.setProgress(0);
-        setTitle("Saving...");
         if (tempFile != null) {
             saveAudio(tempFile);
         }
@@ -361,9 +373,11 @@ public class EditAudioActivity extends ActionBarActivity implements View.OnClick
 
     private void isNotSaving() {
         isSaving = false;
-        saveButton.setIcon(R.drawable.ic_action_save);
+        cancelButton.setVisible(false);
+        buttonSaveAudio.setVisibility(View.VISIBLE);
+        textViewSaving.setVisibility(View.GONE);
         progressBarSave.setVisibility(View.GONE);
-        setTitle(R.string.title_activity_audio_record);
+        imageViewMic.setVisibility(View.VISIBLE);
         if (parseFile != null) parseFile.cancel();
     }
 
@@ -374,13 +388,8 @@ public class EditAudioActivity extends ActionBarActivity implements View.OnClick
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.action_save) {
-            if (!isSaving) {
-                isSaving();
-            }
-            else {
-                isNotSaving();
-            }
+        if (id == R.id.action_cancel) {
+            isNotSaving();
         }
 
 
@@ -389,8 +398,11 @@ public class EditAudioActivity extends ActionBarActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
+        if (buttonSaveAudio == v) {
+            isSaving();
+        }
         if (buttonResetDefault == v) {
-            isNotSaving();
+            if (parseFile != null) parseFile.cancel();
             flowParseObject.remove("audio");
             flowParseObject.saveEventually();
             flowParseObject.pinInBackground(new SaveCallback() {

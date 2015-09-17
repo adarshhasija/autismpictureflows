@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
@@ -32,18 +34,26 @@ public class FlowPublicItemsActivity extends ActionBarActivity {
     public static String LOG_TAG = "FlowPublicItemsActivity";
 
     private ProgressBar progressBarDownload;
+    private ProgressBar progressBarLoading;
+    private Button buttonReturnToProfile;
     private ListView listView;
 
     private ParseObject flowParseObject=null;
     private TextToSpeech textToSpeech=null;
     private void playAudio(String text) {
-        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, "0");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, "0");
+        }
+        else {
+            textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+        }
     }
 
 
     private FindCallback findCallbackCloud = new FindCallback<ParseObject>() {
         @Override
         public void done(List<ParseObject> list, ParseException e) {
+            progressBarLoading.setVisibility(View.GONE);
             if (e == null) {
                 try {
                     ParseObject.pinAll("Item", list);
@@ -110,7 +120,8 @@ public class FlowPublicItemsActivity extends ActionBarActivity {
         bundle.putString("id", newFlow.getObjectId());
         returnIntent.putExtras(bundle);
         setResult(Activity.RESULT_OK, returnIntent);
-        finish();
+        buttonReturnToProfile.setVisibility(View.VISIBLE);
+        //finish();
     }
 
 
@@ -130,12 +141,37 @@ public class FlowPublicItemsActivity extends ActionBarActivity {
                 });
 
         progressBarDownload = (ProgressBar) findViewById(R.id.progressBarDownload);
+        progressBarLoading = (ProgressBar) findViewById(R.id.progressBarLoading);
+        buttonReturnToProfile = (Button) findViewById(R.id.buttonReturnToProfile);
+        buttonReturnToProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         listView = (ListView) findViewById(R.id.list);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ParseObject object = (ParseObject) listView.getAdapter().getItem(position);
                 playAudio(object.getString("text"));
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                new AlertDialog.Builder(getApplicationContext())
+                        .setTitle("No editing")
+                        .setMessage("If you would like to edit, you must download this activity flow to your account")
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // continue with delete
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+                return true;
             }
         });
 
@@ -157,6 +193,7 @@ public class FlowPublicItemsActivity extends ActionBarActivity {
 
         ConnectivityManager cm = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
         if(cm.getActiveNetworkInfo() != null) {
+            progressBarLoading.setVisibility(View.VISIBLE);
             try {
                 ParseObject.unpinAll("Item", list);
             } catch (ParseException e) {
@@ -218,30 +255,26 @@ public class FlowPublicItemsActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_download) {
-            ConnectivityManager cm = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
-            if(cm.getActiveNetworkInfo() != null) {
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            if (currentUser == null) {
                 new AlertDialog.Builder(FlowPublicItemsActivity.this)
-                        .setTitle("Are you sure?")
-                        .setMessage("Are you sure you would like to download this activity flow?")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        .setTitle(R.string.no_user_found)
+                        .setMessage(R.string.no_user_found_message)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                progressBarDownload.setVisibility(View.VISIBLE);
-                                downloadFlow();
-                            }
-                        })
-                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
+
                             }
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
+                return false;
             }
-            else {
+
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
+            if(cm.getActiveNetworkInfo() == null) {
                 new AlertDialog.Builder(FlowPublicItemsActivity.this)
-                        .setTitle("No internet connection")
-                        .setMessage("You must be connected to the internet to download this")
+                        .setTitle(R.string.no_internet_connection)
+                        .setMessage(R.string.no_internet_connection_message)
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // continue with delete
@@ -249,7 +282,28 @@ public class FlowPublicItemsActivity extends ActionBarActivity {
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .show();
+
+                return false;
             }
+
+
+            new AlertDialog.Builder(FlowPublicItemsActivity.this)
+                    .setTitle(R.string.download_activity_flow)
+                    .setMessage(R.string.download_activity_flow_message)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            progressBarDownload.setVisibility(View.VISIBLE);
+                            downloadFlow();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
 
             return true;
         }
