@@ -30,7 +30,7 @@
         android:layout_centerVertical="true"
         android:layout_below="@id/text"
         android:layout_marginTop="20dp"
-        android:src="@mipmap/ic_launcher"
+        android:src="@drawable/ic_launcher"
         android:contentDescription="@string/main_image" />
 
 </RelativeLayout>

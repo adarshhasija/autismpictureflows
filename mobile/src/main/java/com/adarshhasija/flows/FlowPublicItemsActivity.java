@@ -104,7 +104,9 @@ public class FlowPublicItemsActivity extends ActionBarActivity {
             ParseObject newItem = new ParseObject("Item");
             newItem.put("oldItem", oldItem);
             newItem.put("text", oldItem.getString("text"));
-            newItem.put("image", oldItem.getParseFile("image"));
+            if (oldItem.getParseFile("image") != null) {
+                newItem.put("image", oldItem.getParseFile("image"));
+            }
             newItem.put("index", oldItem.getInt("index"));
             newItem.put("owner", ParseUser.getCurrentUser());
             newItem.put("flowId", newFlow.getObjectId());
@@ -260,9 +262,16 @@ public class FlowPublicItemsActivity extends ActionBarActivity {
                 new AlertDialog.Builder(FlowPublicItemsActivity.this)
                         .setTitle(R.string.no_user_found)
                         .setMessage(R.string.no_user_found_message)
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-
+                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton(R.string.signup, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                                startActivity(intent);
                             }
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)

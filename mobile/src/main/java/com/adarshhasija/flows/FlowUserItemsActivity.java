@@ -14,9 +14,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -30,6 +32,7 @@ public class FlowUserItemsActivity extends ActionBarActivity {
 
     public static String LOG_TAG = "FlowUserItemsActivity";
 
+    private Button buttonUpdate;
     private ListView listView;
 
     private List<ParseObject> mList=null;
@@ -85,6 +88,17 @@ public class FlowUserItemsActivity extends ActionBarActivity {
                     }
                 });
 
+        buttonUpdate = (Button) findViewById(R.id.button_update);
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FlowUserItemsUpdateActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", flowParseObject.getObjectId());
+                intent.putExtras(bundle);
+                startActivityForResult(intent, 100);
+            }
+        });
         listView = (ListView) findViewById(R.id.list);
         registerForContextMenu(listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -139,6 +153,70 @@ public class FlowUserItemsActivity extends ActionBarActivity {
             e.printStackTrace();
         }
         setTitle(flowParseObject.getString("text"));
+
+        ParseObject oldFlow = flowParseObject.getParseObject("oldFlow");
+        //Check if oldFlow has a later updatedAt
+        if (oldFlow.getUpdatedAt() != null) {
+            if (oldFlow.getUpdatedAt().after(flowParseObject.getUpdatedAt())) {
+                buttonUpdate.setVisibility(View.VISIBLE);
+            }
+            else {
+                buttonUpdate.setVisibility(View.GONE);
+            }
+        }
+
+
+
+        //Need to get it from the cloud
+        cm = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
+        if(cm.getActiveNetworkInfo() != null) {
+            oldFlow.fetchInBackground(new GetCallback<ParseObject>() {
+                @Override
+                public void done(ParseObject parseObject, ParseException e) {
+                    if (e == null) {
+
+                        //if oldFlow has been updated, set the button to visible
+                        //save the new 'oldFlow' in the local db
+                        //get all related 'Items' from the cloud and save them in the db
+                        if (parseObject.getUpdatedAt().after(flowParseObject.getUpdatedAt())) {
+                            buttonUpdate.setVisibility(View.VISIBLE);
+                            parseObject.pinInBackground("Flow");
+
+                            //Update all the items associated with this flow
+                            List<ParseObject> list = new ArrayList<ParseObject>();
+                            ParseQuery query = ParseQuery.getQuery("Item");
+                            query.whereEqualTo("flowId", parseObject.getObjectId());
+                            query.orderByAscending("index");
+                            query.findInBackground(new FindCallback() {
+                                @Override
+                                public void done(List list, ParseException e) {
+                                    if (e == null) {
+                                        try {
+                                            ParseObject.pinAll("Item", list);
+                                        } catch (ParseException e1) {
+                                            e1.printStackTrace();
+                                        }
+                                    }
+                                    else {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                        }
+                        else {
+                            buttonUpdate.setVisibility(View.GONE);
+                        }
+                    }
+                    else {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+
+
+
+
     }
 
     @Override
@@ -190,7 +268,43 @@ public class FlowUserItemsActivity extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == Activity.RESULT_OK && null != data) {
+        //after update
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK && null != data) {
+            Bundle extras = data.getExtras();
+
+            try {
+                flowParseObject.fetchFromLocalDatastore();
+                setTitle(flowParseObject.getString("text"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            String id = extras.getString("id");
+
+            List<ParseObject> list = new ArrayList<ParseObject>();
+            ParseQuery query = ParseQuery.getQuery("Item");
+            query.whereEqualTo("flowId", id);
+            query.orderByAscending("index");
+            query.fromLocalDatastore();
+            try {
+                list = query.find();
+                mList = list;
+                populateList(list);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            buttonUpdate.setVisibility(View.GONE);
+
+            //This is the notify the main screen that an update happened
+            Intent returnIntent = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putString("id", id);
+            returnIntent.putExtras(bundle);
+            setResult(Activity.RESULT_OK, returnIntent);
+        }
+
+        else if(resultCode == Activity.RESULT_OK && null != data) {
             Bundle bundle = data.getExtras();
             String id = bundle.getString("id");
             ParseObject object=null;

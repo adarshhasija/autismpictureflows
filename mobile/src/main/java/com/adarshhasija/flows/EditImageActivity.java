@@ -38,6 +38,7 @@ public class EditImageActivity extends ActionBarActivity {
     private ParseObject flowParseObject=null;
     private ParseFile parseFile;
     private boolean isSaving=false;
+    private boolean imageExists=true;
 
     private TextView textViewSaving;
     private ProgressBar progressBarSave;
@@ -46,31 +47,51 @@ public class EditImageActivity extends ActionBarActivity {
 
 
     private ParseFile saveImage(Bitmap bitmap) {
-        parseFile = Parse.bitmapToParseFile(bitmap, flowParseObject.getObjectId());
-        parseFile.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                flowParseObject.put("image", parseFile);
-                flowParseObject.saveEventually();
-                flowParseObject.pinInBackground("Item", new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        Intent intent = new Intent();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("id", flowParseObject.getObjectId());
-                        intent.putExtras(bundle);
-                        setResult(Activity.RESULT_OK, intent);
-                        finish();
-                    }
-                });
-            }
-        }, new ProgressCallback() {
-            @Override
-            public void done(Integer integer) {
-                progressBarSave.setProgress(integer);
-            }
-        });
-        return parseFile;
+        if (bitmap != null) {
+            parseFile = Parse.bitmapToParseFile(bitmap, flowParseObject.getObjectId());
+            parseFile.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    flowParseObject.put("image", parseFile);
+                    flowParseObject.saveEventually();
+                    flowParseObject.pinInBackground("Item", new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            Intent intent = new Intent();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("id", flowParseObject.getObjectId());
+                            intent.putExtras(bundle);
+                            setResult(Activity.RESULT_OK, intent);
+                            finish();
+                        }
+                    });
+                }
+            }, new ProgressCallback() {
+                @Override
+                public void done(Integer integer) {
+                    progressBarSave.setProgress(integer);
+                }
+            });
+            return parseFile;
+        }
+        else {
+            flowParseObject.remove("image");
+            flowParseObject.saveEventually();
+            flowParseObject.pinInBackground("Item", new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    Intent intent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", flowParseObject.getObjectId());
+                    intent.putExtras(bundle);
+                    progressBarSave.setProgress(100);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                }
+            });
+            return null;
+        }
+
     }
 
     @Override
@@ -87,8 +108,11 @@ public class EditImageActivity extends ActionBarActivity {
         query.fromLocalDatastore();
         try {
             flowParseObject = query.get(id);
-            bytes = flowParseObject.getParseFile("image").getData();
-            bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            if (flowParseObject.getParseFile("image") != null) {
+                bytes = flowParseObject.getParseFile("image").getData();
+                bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            }
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -98,10 +122,10 @@ public class EditImageActivity extends ActionBarActivity {
         final Button buttonPlayStop = (Button) findViewById(R.id.buttonPlayStop);
         Button buttonDefaults = (Button) findViewById(R.id.buttonDefaults);
         ImageView imageViewMain = (ImageView) findViewById(R.id.imageViewMain);
+        imageViewMain.setContentDescription("Main image: choose between camera button and gallery button to change image");
+        registerForContextMenu(imageViewMain);
         if(bitmap != null) {
             imageViewMain.setImageBitmap(bitmap);
-            imageViewMain.setContentDescription("Main image: choose between camera button and gallery button to change image");
-            registerForContextMenu(imageViewMain);
         }
         Button buttonCamera = (Button) findViewById(R.id.buttonCamera);
         Button buttonGallery = (Button) findViewById(R.id.buttonGallery);
@@ -132,21 +156,40 @@ public class EditImageActivity extends ActionBarActivity {
             Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(i, REQUEST_IMAGE_GALLERY);
         }
+        //reset default
         else {
             ParseObject oldItem = flowParseObject.getParseObject("oldItem");
             try {
                 oldItem.fetchFromLocalDatastore();
-                byte[] bytes = oldItem.getParseFile("image").getData();
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                ImageView imageViewMain = (ImageView) findViewById(R.id.imageViewMain);
-                if(bitmap != null) {
-                    imageViewMain.setImageBitmap(bitmap);
-                    saveButton.setVisible(true);
-                }
-
             } catch (ParseException e) {
                 e.printStackTrace();
+                try {
+                    oldItem.fetch();
+                } catch (ParseException e1) {
+                    e1.printStackTrace();
+                }
             }
+                if (oldItem.getParseFile("image") != null) {
+                    byte[] bytes = new byte[0];
+                    try {
+                        bytes = oldItem.getParseFile("image").getData();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                    ImageView imageViewMain = (ImageView) findViewById(R.id.imageViewMain);
+                    if(bitmap != null) {
+                        imageViewMain.setImageBitmap(bitmap);
+                        saveButton.setVisible(true);
+                    }
+                }
+                //if there was no image set originally
+                else {
+                    ImageView imageViewMain = (ImageView) findViewById(R.id.imageViewMain);
+                    imageViewMain.setImageResource(R.drawable.ic_launcher);
+                    imageExists=false;
+                    saveButton.setVisible(true);
+                }
         }
 
         return super.onContextItemSelected(item);
@@ -210,13 +253,23 @@ public class EditImageActivity extends ActionBarActivity {
 
     private void isSaving() {
         isSaving = true;
-        saveButton.setIcon(R.drawable.ic_action_cancel);
-        textViewSaving.setVisibility(View.VISIBLE);
-        progressBarSave.setVisibility(View.VISIBLE);
-        progressBarSave.setProgress(0);
-        ImageView imageViewMain = (ImageView) findViewById(R.id.imageViewMain);
-        Bitmap bitmap = ((BitmapDrawable)imageViewMain.getDrawable()).getBitmap();
-        saveImage(bitmap);
+        if (imageExists) {
+            saveButton.setIcon(R.drawable.ic_action_cancel);
+            textViewSaving.setVisibility(View.VISIBLE);
+            progressBarSave.setVisibility(View.VISIBLE);
+            progressBarSave.setProgress(0);
+            ImageView imageViewMain = (ImageView) findViewById(R.id.imageViewMain);
+            Bitmap bitmap = ((BitmapDrawable)imageViewMain.getDrawable()).getBitmap();
+            saveImage(bitmap);
+        }
+        else {
+            saveButton.setIcon(R.drawable.ic_action_cancel);
+            textViewSaving.setVisibility(View.VISIBLE);
+            progressBarSave.setVisibility(View.VISIBLE);
+            progressBarSave.setProgress(0);
+            saveImage(null);
+        }
+
     }
 
     private void isNotSaving() {

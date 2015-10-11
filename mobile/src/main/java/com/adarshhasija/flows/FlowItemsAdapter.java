@@ -66,18 +66,24 @@ public class FlowItemsAdapter extends ArrayAdapter<ParseObject> {
             protected Bitmap doInBackground(ViewHolder... params) {
                 v = params[0];
                 byte[] imageData = new byte[0];
-                try {
-                    imageData = object.getParseFile("image").getData();
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                Bitmap bitmap = null;
+                if (object.getParseFile("image") != null) {
+                    try {
+                        imageData = object.getParseFile("image").getData();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
                 }
-                Bitmap bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
+
                 return bitmap;
             }
 
             @Override
             protected void onPostExecute(Bitmap result) {
-                v.iconView.setImageBitmap(result);
+                if (result != null) {
+                    v.iconView.setImageBitmap(result);
+                }
                 super.onPostExecute(result);
             }
         }.execute(viewHolder);

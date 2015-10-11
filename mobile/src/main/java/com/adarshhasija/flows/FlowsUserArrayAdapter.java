@@ -39,6 +39,11 @@ public class FlowsUserArrayAdapter extends ArrayAdapter<ParseObject> {
     }
 
     @Override
+    public int getCount() {
+        return this.objects.size();
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         ViewHolder viewHolder;
@@ -71,18 +76,24 @@ public class FlowsUserArrayAdapter extends ArrayAdapter<ParseObject> {
                 //File image = Parse.parseFileToJavaFile(object.getParseFile("image"));
                 //Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath());
                 byte[] imageData = new byte[0];
-                try {
-                    imageData = object.getParseFile("image").getData();
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                Bitmap bitmap = null;
+                if (object.getParseFile("image") != null) {
+                    try {
+                        imageData = object.getParseFile("image").getData();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
                 }
-                Bitmap bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
+
                 return bitmap;
             }
 
             @Override
             protected void onPostExecute(Bitmap result) {
-                v.iconView.setImageBitmap(result);
+                if (result != null) {
+                    v.iconView.setImageBitmap(result);
+                }
                 super.onPostExecute(result);
             }
         }.execute(viewHolder);

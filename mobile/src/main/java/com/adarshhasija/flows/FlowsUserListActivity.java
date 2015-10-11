@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,6 +28,8 @@ public class FlowsUserListActivity extends ActionBarActivity {
 
     private static String LOG_TAG = "FlowsUserListActivity";
 
+    private LinearLayout emptyView;
+    private Button buttonViewCloud;
     private ListView listView;
     private TextView textViewEmpty;
     private RelativeLayout greetingsLayout;
@@ -48,15 +52,33 @@ public class FlowsUserListActivity extends ActionBarActivity {
     };
 
     private void populateList(List<ParseObject> list) {
-        FlowsUserArrayAdapter adapter = new FlowsUserArrayAdapter(getApplicationContext(), R.layout.row_flows_user, list);
-        listView.setAdapter(adapter);
-        if (list.size() > 0) {
-            textViewEmpty.setVisibility(View.GONE);
+        FlowsUserArrayAdapter adapter = (FlowsUserArrayAdapter) listView.getAdapter();
+        if (adapter == null) {
+            adapter = new FlowsUserArrayAdapter(getApplicationContext(), R.layout.row_flows_user, list);
+            listView.setAdapter(adapter);
         }
         else {
-            listView.setVisibility(View.GONE);
-            listView.setOnItemClickListener(null);
+            adapter.clear();
+            adapter.addAll(list);
+            adapter.notifyDataSetChanged();
         }
+
+        if (list.size() > 0) {
+            makeListViewVisible();
+        }
+        else {
+            makeListViewInvisible();
+        }
+    }
+
+    private void makeListViewInvisible() {
+        emptyView.setVisibility(View.VISIBLE);
+        listView.setVisibility(View.GONE);
+    }
+
+    private void makeListViewVisible() {
+        emptyView.setVisibility(View.GONE);
+        listView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -64,7 +86,14 @@ public class FlowsUserListActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flows_user_list);
 
-        textViewEmpty = (TextView) findViewById(R.id.textViewEmpty);
+        emptyView = (LinearLayout) findViewById(R.id.emptyView);
+        buttonViewCloud = (Button) findViewById(R.id.button_view_cloud);
+        buttonViewCloud.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewCloud();
+            }
+        });
         greetingsLayout = (RelativeLayout) findViewById(R.id.greetingsLayout);
         greetingsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,8 +148,7 @@ public class FlowsUserListActivity extends ActionBarActivity {
 
         //returned from cloud
         if (requestCode == 5000 && resultCode == Activity.RESULT_OK && null != data) {
-            listView.setVisibility(View.VISIBLE);
-            textViewEmpty.setVisibility(View.GONE);
+            makeListViewVisible();
             Bundle extras = data.getExtras();
             String id = extras.getString("id");
             ParseQuery query = ParseQuery.getQuery("Flow");
@@ -130,24 +158,45 @@ public class FlowsUserListActivity extends ActionBarActivity {
                 FlowsUserArrayAdapter adapter = (FlowsUserArrayAdapter) listView.getAdapter();
                 adapter.insert(flow, 0);
                 adapter.notifyDataSetChanged();
+                makeListViewVisible();
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
         }
+        //delete
         else if (requestCode > -1 && resultCode == Activity.RESULT_OK && null != data) {
             Bundle extras = data.getExtras();
             String type = extras.getString("type");
-            if (type.equals("delete")) {
-                ParseObject flow = (ParseObject) listView.getAdapter().getItem(requestCode);
+            if (type != null) {
+                if (type.equals("delete")) {
+                    ParseObject flow = (ParseObject) listView.getAdapter().getItem(requestCode);
+                    try {
+                        flow.unpin("Flow");
+                        flow.deleteEventually();
+                        FlowsUserArrayAdapter adapter = (FlowsUserArrayAdapter) listView.getAdapter();
+                        adapter.remove(adapter.getItem(requestCode));
+                        adapter.notifyDataSetChanged();
+                        if (adapter.getCount() < 1) {
+                            makeListViewInvisible();
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            else {
                 try {
-                    flow.unpin("Flow");
-                    flow.deleteEventually();
+                    String flowId = extras.getString("id");
+                    ParseQuery query = ParseQuery.getQuery("Flow");
+                    query.fromLocalDatastore();
+                    ParseObject flow = query.get(flowId);
                     FlowsUserArrayAdapter adapter = (FlowsUserArrayAdapter) listView.getAdapter();
                     adapter.remove(adapter.getItem(requestCode));
+                    adapter.insert(flow, requestCode);
                     adapter.notifyDataSetChanged();
                 } catch (ParseException e) {
-                    e.printStackTrace();
+
                 }
             }
         }
@@ -169,11 +218,15 @@ public class FlowsUserListActivity extends ActionBarActivity {
 
 
         if (id == R.id.action_cloud) {
-            Intent intent = new Intent(this, FlowsPublicListActivity.class);
-            startActivityForResult(intent, 5000);
+            viewCloud();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void viewCloud() {
+        Intent intent = new Intent(this, FlowsPublicListActivity.class);
+        startActivityForResult(intent, 5000);
     }
 }

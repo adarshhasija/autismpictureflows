@@ -54,6 +54,8 @@ public class FullscreenActivity extends Activity {
                 });
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        imageView.setContentDescription("This is the main image");
+        //registerForContextMenu(imageView);
 
         Bundle extras = getIntent().getExtras();
         String id = extras.getString("id");
@@ -63,13 +65,14 @@ public class FullscreenActivity extends Activity {
         query.fromLocalDatastore();
         try {
             object = query.get(id);
-            bytes = object.getParseFile("image").getData();
-            bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-            if(bitmap != null) {
-                imageView.setImageBitmap(bitmap);
-                imageView.setContentDescription("Main image: choose between camera button and gallery button to change image");
-                registerForContextMenu(imageView);
+            if (object.getParseFile("image") != null) {
+                bytes = object.getParseFile("image").getData();
+                bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                if(bitmap != null) {
+                    imageView.setImageBitmap(bitmap);
+                }
             }
+
         } catch (ParseException e) {
             e.printStackTrace();
         }

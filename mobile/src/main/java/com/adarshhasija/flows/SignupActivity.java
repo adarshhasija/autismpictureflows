@@ -1,6 +1,7 @@
 package com.adarshhasija.flows;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -10,19 +11,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
-public class LoginActivity extends ActionBarActivity {
+public class SignupActivity extends ActionBarActivity {
 
-    private ProgressBar progressBar;
+    private EditText editTextFirstName;
+    private EditText editTextLastName;
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private Button buttonLogin;
-
+    private EditText editTextPasswordConfirm;
+    private Button buttonSignup;
 
     private boolean isValidEmail(String target) {
         if (TextUtils.isEmpty(target)) {
@@ -35,23 +37,37 @@ public class LoginActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_signup);
 
-        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        editTextFirstName = (EditText) findViewById(R.id.edit_text_first_name);
+        editTextLastName = (EditText) findViewById(R.id.edit_text_last_name);
         editTextEmail = (EditText) findViewById(R.id.edit_text_email);
         editTextPassword = (EditText) findViewById(R.id.edit_text_password);
-        buttonLogin = (Button) findViewById(R.id.login_button);
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
+        editTextPasswordConfirm = (EditText) findViewById(R.id.edit_text_password_confirm);
+        buttonSignup = (Button) findViewById(R.id.signup_button);
+        buttonSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String firstName = editTextFirstName.getText().toString();
+                String lastName = editTextLastName.getText().toString();
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
-                boolean emailValid = isValidEmail(email);
+                String passwordConfirm = editTextPasswordConfirm.getText().toString();
+
                 ConnectivityManager cm = (ConnectivityManager) getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
                 if(cm.getActiveNetworkInfo() == null) {
                     Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (firstName.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "You have not entered a first name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (lastName.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "You have not entered a last name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                boolean emailValid = isValidEmail(email);
                 if (!emailValid) {
                     Toast.makeText(getApplicationContext(), "You have not entered an email, or it is invalid", Toast.LENGTH_SHORT).show();
                     return;
@@ -60,18 +76,26 @@ public class LoginActivity extends ActionBarActivity {
                     Toast.makeText(getApplicationContext(), "You have not entered a password", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                try {
-                    progressBar.setVisibility(View.VISIBLE);
-                    ParseUser user = ParseUser.logIn(email, password);
-                    if (user != null) {
+                if (!passwordConfirm.equals(password)) {
+                    Toast.makeText(getApplicationContext(), "The password you retyped does not match the original password", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                ParseUser user = new ParseUser();
+                user.setUsername(email);
+                user.setPassword(password);
+                user.setEmail(email);
+                user.put("firstName", firstName);
+                user.put("lastName", lastName);
+                user.signUpInBackground(new SignUpCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        Intent returnIntent = new Intent();
                         setResult(Activity.RESULT_OK, null);
                         finish();
                     }
-                } catch (ParseException e) {
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), "Error login failed", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
+                });
+
             }
         });
     }
@@ -79,7 +103,7 @@ public class LoginActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
+        getMenuInflater().inflate(R.menu.menu_signup, menu);
         return true;
     }
 

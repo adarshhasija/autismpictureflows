@@ -4,9 +4,15 @@
     <string name="app_name">ComputerActivities</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="existing_user">Existing User?</string>
+    <string name="login">LOGIN</string>
+    <string name="new_user">New User?</string>
+    <string name="signup">SIGNUP</string>
+    <string name="or">OR</string>
+
     <string name="title_activity_main_grid">MainGridActivity</string>
     <string name="title_activity_item">ItemActivity</string>
-    <string name="msword">Microsoft Word</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="save">save</string>
     <string name="delete">delete</string>
@@ -46,5 +52,18 @@
     <string name="download_complete_return_to_profile">Download Complete\nTap here to return to your profile</string>
     <string name="feelings">Feelings</string>
     <string name="title_activity_feelings_list">Feelings</string>
+
+    <string name="updates_available">Updates are available. Tap to view</string>
+    <string name="title_activity_flow_user_items_update">Update</string>
+
+    <string name="view_cloud">VIEW CLOUD</string>
+    <string name="title_activity_welcome_screen">WelcomeScreenActivity</string>
+    <string name="password_hint">Password</string>
+    <string name="reenter_password_hint">Re-enter password</string>
+    <string name="title_activity_signup">Signup</string>
+
+    <string name="first_name_hint">First name</string>
+    <string name="last_name_hint">Last name</string>
+
 
 </resources>
