@@ -14,7 +14,6 @@ public class WelcomeScreenActivity extends Activity {
 
     private Button buttonLogin;
     private Button buttonSignup;
-    private Button buttonViewCloud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +32,8 @@ public class WelcomeScreenActivity extends Activity {
         buttonSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                Intent intent = new Intent(getApplicationContext(), WelcomeNewUserActivity.class);
                 startActivityForResult(intent, 1);
-            }
-        });
-        buttonViewCloud = (Button) findViewById(R.id.view_cloud_button);
-        buttonViewCloud.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), FlowsPublicListActivity.class);
-                startActivity(intent);
             }
         });
     }

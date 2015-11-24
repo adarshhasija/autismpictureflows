@@ -81,6 +81,8 @@ public class SignupActivity extends ActionBarActivity {
                     return;
                 }
 
+                firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
+                lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
                 ParseUser user = new ParseUser();
                 user.setUsername(email);
                 user.setPassword(password);

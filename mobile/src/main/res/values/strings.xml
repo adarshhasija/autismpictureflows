@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ComputerActivities</string>
+    <string name="app_name">Autism Activities</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-    <string name="existing_user">Existing User?</string>
+    <string name="existing_user">No. Im an existing user</string>
     <string name="login">LOGIN</string>
-    <string name="new_user">New User?</string>
+    <string name="new_user">Are you new to this app?</string>
     <string name="signup">SIGNUP</string>
     <string name="or">OR</string>
+    <string name="yes">YES</string>
+    <string name="welcome_back">Welcome Back!</string>
 
     <string name="title_activity_main_grid">MainGridActivity</string>
     <string name="title_activity_item">ItemActivity</string>
@@ -39,7 +41,7 @@
     <string name="title_activity_flow_public_items">FlowPublicItemsActivity</string>
     <string name="reset_default_audio">Want computer voice?\nReset default</string>
     <string name="no_user_found">No user found</string>
-    <string name="no_user_found_message">You need to login or signup to download this</string>
+    <string name="no_user_found_message">You need to have an account to download this. Would you like to create one now?</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="no_internet_connection_message">You must be connected to the internet to download this</string>
     <string name="download_activity_flow">Are you sure?</string>
@@ -64,6 +66,9 @@
 
     <string name="first_name_hint">First name</string>
     <string name="last_name_hint">Last name</string>
+    <string name="welcome_new_users_main">Welcome!\nYou can view the stories available in the public cloud. If you want to download one, you can create an account, then download it.\nTap OK to proceed.</string>
+    <string name="download_successful">Download Successful!\nTap OK to go to your profile.</string>
+
 
 
 </resources>

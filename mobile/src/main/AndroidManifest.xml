@@ -24,7 +24,7 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/autism_activities"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -49,7 +49,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="Main Activity" >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -93,6 +93,14 @@
         <activity
             android:name=".SignupActivity"
             android:label="@string/title_activity_signup" >
+        </activity>
+        <activity
+            android:name=".WelcomeNewUserActivity"
+            android:label="@string/welcome_new_users_main" >
+        </activity>
+        <activity
+            android:name=".DownloadSuccessfulActivity"
+            android:label="@string/download_successful" >
         </activity>
     </application>
 

@@ -122,7 +122,9 @@ public class FlowPublicItemsActivity extends ActionBarActivity {
         bundle.putString("id", newFlow.getObjectId());
         returnIntent.putExtras(bundle);
         setResult(Activity.RESULT_OK, returnIntent);
-        buttonReturnToProfile.setVisibility(View.VISIBLE);
+        Intent intent = new Intent(FlowPublicItemsActivity.this, DownloadSuccessfulActivity.class);
+        startActivityForResult(intent, 0);
+        //buttonReturnToProfile.setVisibility(View.VISIBLE);
         //finish();
     }
 
@@ -218,6 +220,15 @@ public class FlowPublicItemsActivity extends ActionBarActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK) {
+            finish();
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_flow_public_items, menu);
@@ -262,16 +273,15 @@ public class FlowPublicItemsActivity extends ActionBarActivity {
                 new AlertDialog.Builder(FlowPublicItemsActivity.this)
                         .setTitle(R.string.no_user_found)
                         .setMessage(R.string.no_user_found_message)
-                        .setPositiveButton(R.string.login, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                startActivity(intent);
-                            }
-                        })
-                        .setNegativeButton(R.string.signup, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
                                 startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
                             }
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert)
